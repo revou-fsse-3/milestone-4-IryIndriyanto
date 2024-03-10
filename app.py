@@ -3,8 +3,10 @@ from db import db
 from flask import Flask
 from dotenv import load_dotenv
 from flask_smorest import Api
+from flask_jwt_extended import JWTManager
 
 from controllers.user import blp as user_blueprint
+
 
 def create_app(is_test_active=False):
     app = Flask(__name__)
@@ -19,9 +21,10 @@ def create_app(is_test_active=False):
     app.config["OPENAPI_SWAGGER_UI_URL"] = (
         "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
     )
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
-        "DATABASE_URL", "sqlite:///revou_bank.db"
-    )
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+
+    app.config["JWT_SECRET_KEY"] = "REVOU_MILESTONE_4"
+    jwt = JWTManager(app)
 
     db.init_app(app)
     with app.app_context():
