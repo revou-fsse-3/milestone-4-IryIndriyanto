@@ -6,6 +6,8 @@ from flask_smorest import Api
 from flask_jwt_extended import JWTManager
 
 from controllers.user import blp as user_blueprint
+from controllers.account import blp as account_blueprint
+from controllers.transaction import blp as transaction_blueprint
 
 
 def create_app(is_test_active=False):
@@ -33,5 +35,7 @@ def create_app(is_test_active=False):
     api = Api(app)
 
     api.register_blueprint(user_blueprint)
+    api.register_blueprint(account_blueprint)
+    api.register_blueprint(transaction_blueprint)
 
     return app
