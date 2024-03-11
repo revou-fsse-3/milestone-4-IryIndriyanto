@@ -1,7 +1,7 @@
 from db import db
 
 
-class AccountModel(db.Model):
+class TransactionModel(db.Model):
     __tablename__ = "transaction"
 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
