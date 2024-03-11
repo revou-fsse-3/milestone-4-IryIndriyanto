@@ -1,8 +1,37 @@
-POST http://127.0.0.1:5000/users/register
+@ACCESS_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNzEwMTYwMjgxLCJqdGkiOiI2MmU3OGI1NS1lZDYwLTQ5YjYtOGZhNC0zNWQzNjU4OTNkNjMiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoxLCJuYmYiOjE3MTAxNjAyODEsImNzcmYiOiJmNjA0Nzg5Ny1jZGRhLTQwMDMtYmM0My03NjZmMjRkMDBmYzIiLCJleHAiOjE3MTAxNjExODF9.-0ajjb2BA-TrHdFJKIwJ8PfqEubf6PxOMpPRjA-3YLo
+
+### register_new_user
+POST http://127.0.0.1:5000/users
 Content-Type: application/json
 
 {
-  "username": "user2",
-  "email": "user2@example.com",
+  "username": "user",
+  "email": "user@example.com",
   "password": "ispassword"
+}
+
+### user_login
+POST http://127.0.0.1:5000/users/login
+Content-Type: application/json
+
+{
+  "username": "user355",
+  "email": "user@example.com",
+  "password": "ispassword123"
+}
+
+### get_user_info
+GET http://127.0.0.1:5000/users/me
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+
+### update_user_info
+PUT http://127.0.0.1:5000/users/me
+Authorization: Bearer {{ACCESS_TOKEN}}
+Content-Type: application/json
+
+{
+  "username": "user355",
+  "email": "user@example.com",
+  "password": "ispassword123"
 }
