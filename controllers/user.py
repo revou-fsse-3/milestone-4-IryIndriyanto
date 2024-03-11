@@ -1,6 +1,6 @@
 from db import db
 from flask import jsonify
-from flask_smorest import Blueprint, abort
+from flask_smorest import Blueprint
 from models.user import UserModel
 from schemas.user import UserRegistrationSchema
 from sqlalchemy.exc import IntegrityError
@@ -18,13 +18,12 @@ def get_users():
 @blp.arguments(UserRegistrationSchema)
 @blp.response(200)
 def create_user(user_data):
-    user = UserModel(
-        username=user_data["username"],
-        email=user_data["email"],
-        password_hash=pbkdf2_sha256.hash(user_data["password"]),
-    )
-
     try:
+        user = UserModel(
+            username=user_data["username"],
+            email=user_data["email"],
+            password_hash=pbkdf2_sha256.hash(user_data["password"]),
+        )
         db.session.add(user)
         db.session.commit()
     except IntegrityError:
