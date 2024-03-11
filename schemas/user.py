@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields
 
-class UserRegistrationSchema(Schema):
+class UserSchema(Schema):
     username = fields.Str(required=True)
     email = fields.Email(required=True)
     password = fields.Str(required=True)
