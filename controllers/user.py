@@ -5,7 +5,12 @@ from models.user import UserModel
 from schemas.user import UserSchema
 from sqlalchemy.exc import IntegrityError
 from passlib.hash import pbkdf2_sha256
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import (
+    create_access_token,
+    create_refresh_token,
+    jwt_required,
+    get_jwt_identity,
+)
 
 blp = Blueprint("users", "users", description="data of users", url_prefix="/users")
 
@@ -39,3 +44,14 @@ def user_login(user_data):
             200,
         )
     return jsonify({"message": "Invalid credentials"}), 401
+
+
+@blp.route("/me", methods=["GET"])
+@jwt_required()
+@blp.response(200)
+def get_user_profile():
+    user_id = get_jwt_identity()
+    user = UserModel.query.get(user_id)
+    if user:
+        return jsonify({"username": user.username, "email": user.email}), 200
+    return jsonify({"message": "User not found"}), 404
