@@ -1,12 +1,12 @@
-@ACCESS_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNzEwMTYwMjgxLCJqdGkiOiI2MmU3OGI1NS1lZDYwLTQ5YjYtOGZhNC0zNWQzNjU4OTNkNjMiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoxLCJuYmYiOjE3MTAxNjAyODEsImNzcmYiOiJmNjA0Nzg5Ny1jZGRhLTQwMDMtYmM0My03NjZmMjRkMDBmYzIiLCJleHAiOjE3MTAxNjExODF9.-0ajjb2BA-TrHdFJKIwJ8PfqEubf6PxOMpPRjA-3YLo
+@ACCESS_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNzEwMzMyNjQ1LCJqdGkiOiI4ODJmMzg4MS04YTE3LTRkMWMtOTMxYi1lZWRjZGU0MDEwNzIiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoxLCJuYmYiOjE3MTAzMzI2NDUsImNzcmYiOiI0NzVkZWE5Mi1mNTE5LTRjNTYtYTk4Yi02YTRmY2QwOTdhNmYiLCJleHAiOjE3MTAzMzM1NDV9.HWQxZMitEhHy_8AyL_zcpOvtMlMXvIoWRsXdd7pDhD8
 
 ### register_new_user
 POST http://127.0.0.1:5000/users
 Content-Type: application/json
 
 {
-  "username": "user",
-  "email": "user@example.com",
+  "username": "user3",
+  "email": "user3@example.com",
   "password": "ispassword"
 }
 
@@ -15,9 +15,9 @@ POST http://127.0.0.1:5000/users/login
 Content-Type: application/json
 
 {
-  "username": "user355",
-  "email": "user@example.com",
-  "password": "ispassword123"
+  "username": "user",
+  "email": "user1@example.com",
+  "password": "ispassword1"
 }
 
 ### get_user_info
@@ -31,7 +31,20 @@ Authorization: Bearer {{ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
-  "username": "user355",
-  "email": "user@example.com",
-  "password": "ispassword123"
+  "username": "user1",
+  "email": "user1@example.com",
+  "password": "ispassword1"
 }
+
+### create_new_account
+POST http://127.0.0.1:5000/accounts
+Authorization: Bearer {{ACCESS_TOKEN}}
+Content-Type: application/json
+
+{
+  "account_type": "daily_use"
+}
+
+### get_list_of_account
+GET http://127.0.0.1:5000/accounts
+Authorization: Bearer {{ACCESS_TOKEN}}
