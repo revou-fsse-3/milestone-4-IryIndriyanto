@@ -38,21 +38,27 @@ def get_transactions():
     return jsonify({"message": "Transaction not found"}), 404
 
 
-# @blp.route("/<int:transaction_id>", methods=["GET"])
-# @jwt_required()
-# @blp.response(200, TransactionSchema)
-# def get_transaction(transaction_id):
-#     user_id = get_jwt_identity()
-#     account_ids = (
-#         AccountModel.query.with_entities(AccountModel.id)
-#         .filter_by(user_id=user_id)
-#         .all()
-#     )
-#     account_ids_list = [account[0] for account in account_ids]
-#     transaction = TransactionModel.query.filter_by(id=transaction_id)
-#     if transaction :
-#         return transaction
-#     return jsonify({"message": "Transaction not found"}), 404
+@blp.route("/<int:transaction_id>", methods=["GET"])
+@jwt_required()
+@blp.response(200, TransactionSchema)
+def get_transaction(transaction_id):
+    user_id = get_jwt_identity()
+    account_ids = (
+        AccountModel.query.with_entities(AccountModel.id)
+        .filter_by(user_id=user_id)
+        .all()
+    )
+    account_ids_list = [account[0] for account in account_ids]
+    transaction = db.session.get(TransactionModel, transaction_id)
+    if transaction is None:
+        return jsonify({"message": "Transaction not found"}), 404
+    if transaction and (
+        transaction.from_account_id in account_ids_list
+        or transaction.to_account_id in account_ids_list
+    ):
+        return transaction
+    else:
+        return jsonify({"message": "You are not authorized"}), 403
 
 
 @blp.route("/", methods=["POST"])
