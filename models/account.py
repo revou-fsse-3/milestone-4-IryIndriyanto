@@ -8,7 +8,7 @@ class AccountModel(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     account_type = db.Column(db.String(255), nullable=False)
     account_number = db.Column(db.String(255), unique=True, nullable=False)
-    balance = db.Column(db.Float(10, 2), nullable=False)
+    balance = db.Column(db.Numeric(10, 2), nullable=False)
     created_at = db.Column(
         db.DateTime(timezone=True), default=db.func.now(), nullable=False
     )
