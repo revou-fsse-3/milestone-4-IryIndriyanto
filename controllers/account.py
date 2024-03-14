@@ -25,10 +25,12 @@ def get_accounts():
 
 @blp.route("/<int:account_id>", methods=["GET"])
 @jwt_required()
-@blp.response(200, AccountSchema)
+@blp.response(200, CompleteAccountSchema)
 def get_account(account_id):
     user_id = get_jwt_identity()
-    account = AccountModel.query.filter_by(id=account_id, user_id=user_id)
+    account = db.session.get(AccountModel, account_id)
+    if account.user_id != user_id:
+        return jsonify({"message": "You are not authorized"}), 403
     if account:
         return account
     return jsonify({"message": "Account not found"}), 404
@@ -58,7 +60,9 @@ def create_new_account(account_data):
 @blp.response(200)
 def edit_user_profile(updated_account_data, account_id):
     user_id = get_jwt_identity()
-    account = AccountModel.query.filter_by(id=account_id, user_id=user_id)
+    account = db.session.get(AccountModel, account_id)
+    if account.user_id != user_id:
+        return jsonify({"message": "You are not authorized"}), 403
     if account:
         AccountModel.query.filter_by(id=account_id, user_id=user_id).update(updated_account_data)
         db.session.commit()
@@ -71,7 +75,9 @@ def edit_user_profile(updated_account_data, account_id):
 @blp.response(200)
 def edit_user_profile(account_id):
     user_id = get_jwt_identity()
-    account = AccountModel.query.filter_by(id=account_id, user_id=user_id)
+    account = db.session.get(AccountModel, account_id)
+    if account.user_id != user_id:
+        return jsonify({"message": "You are not authorized"}), 403
     if account:
         db.session.delete(account)
         db.session.commit()
