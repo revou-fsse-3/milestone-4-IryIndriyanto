@@ -1,12 +1,12 @@
-@ACCESS_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNzEwNDI4MjQyLCJqdGkiOiIyNzhjY2NjNi03NjliLTQwMzEtOWM5NC02NjU5OWNjY2RhODciLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoxLCJuYmYiOjE3MTA0MjgyNDIsImNzcmYiOiIyOTU5MmQ0OC1mMmM5LTQzNzgtYTEzOS1iZTkwODI0ODA5MWQiLCJleHAiOjE3MTA0MjkxNDJ9.NWtcBrAWQxQI5nZDdapYiN3TI9NlMTTuz7JOq3Vio9o
+@ACCESS_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNzEwNTc0MzY4LCJqdGkiOiI0MDQ2OTlkNy00OWUxLTQyMWEtODczOS0wODZiZWI0MWE5ZmQiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoyLCJuYmYiOjE3MTA1NzQzNjgsImNzcmYiOiI0NTgxNGNhZC04ZTllLTRiMmMtYTYzNi0yYWQ2MDEzYjMyNDgiLCJleHAiOjE3MTA1NzUyNjh9.iwpdQ4Yc4jlKu-itegdNfI5xowgfGIkxYg9r0-pYGw0
 
 ### register_new_user
 POST http://127.0.0.1:5000/users
 Content-Type: application/json
 
 {
-  "username": "user1",
-  "email": "user1@example.com",
+  "username": "user2",
+  "email": "user2@example.com",
   "password": "ispassword"
 }
 
@@ -15,8 +15,8 @@ POST http://127.0.0.1:5000/users/login
 Content-Type: application/json
 
 {
-  "username": "user1",
-  "email": "user1@example.com",
+  "username": "user2",
+  "email": "user2@example.com",
   "password": "ispassword"
 }
 
@@ -42,7 +42,7 @@ Authorization: Bearer {{ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
-  "account_type": "invest"
+  "account_type": "saving"
 }
 
 ### get_list_of_account
@@ -83,8 +83,8 @@ Authorization: Bearer {{ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
-  "from_account_id": 1,
-  "amount": 10000.50,
-  "type": "withdrawal",
+  "to_account_id": 3,
+  "amount": 10000.45,
+  "type": "deposit",
   "description": "test transaction"
 }
