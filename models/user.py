@@ -9,4 +9,4 @@ class UserModel(db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), default=db.func.now(), nullable=False)
-    updated_at = db.Column(db.DateTime(timezone=True), onupdate=db.func.now())
+    updated_at = db.Column(db.DateTime(timezone=True), default=db.func.now(), onupdate=db.func.now())
