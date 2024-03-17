@@ -90,7 +90,7 @@ def create_new_transaction(transaction_data):
                 id=transaction_data["from_account_id"], user_id=user_id
             ).first()
             to_account = AccountModel.query.filter_by(
-                id=transaction_data["to_account_id"], user_id=user_id
+                id=transaction_data["to_account_id"]
             ).first()
 
             if from_account.balance < transaction_data["amount"]:
